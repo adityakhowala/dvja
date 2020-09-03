@@ -17,7 +17,7 @@ pipeline {
         stage('Post Commit Check Secrets') {
             steps {
                 sh '''
-                    rm truffle_report.json || :
+                    // rm truffle_report.json || :
                     docker run -t dxa4481/trufflehog --json https://github.com/adityakhowala/dvja > truffle_report.json
                     cat truffle_report.json
                 '''

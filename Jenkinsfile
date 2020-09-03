@@ -14,7 +14,7 @@ pipeline {
             }
         }
         
-        stage('Initialize') {
+        stage('Post Commit Check Secrets') {
             steps {
                 sh '''
                     rm truffle_report.json || :

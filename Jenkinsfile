@@ -28,6 +28,13 @@ pipeline {
             steps {
                 sh '''
                     echo ${USER}
+                    f [[ ! -d odc-reports ]]
+                    then
+                        mkdir odc-reports
+                    fi
+                    sudo chown -R jenkins:jenkins odc-reports/ || :
+                    chmod +x OWASP-Dependency-Check.sh
+                    bash OWASP-Dependency-Check.sh
                 '''
             }
         }

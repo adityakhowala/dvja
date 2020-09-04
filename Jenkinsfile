@@ -28,7 +28,7 @@ pipeline {
             steps {
                 sh '''
                     echo ${USER}
-                    f [[ ! -d odc-reports ]]
+                    if [[ ! -d odc-reports ]]
                     then
                         mkdir odc-reports
                     fi

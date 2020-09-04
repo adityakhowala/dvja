@@ -19,7 +19,7 @@ fi
 docker pull owasp/dependency-check:$DC_VERSION
 
 docker run --rm \
-    -e user=${USER} \
+    -e user=$USER \
     -u $(id -u ${USER}):$(id -g ${USER}) \
     --volume $(pwd):/src:z \
     --volume "$DATA_DIRECTORY":/usr/share/dependency-check/data:z \
@@ -27,8 +27,6 @@ docker run --rm \
     owasp/dependency-check:$DC_VERSION \
     --scan /src \
     --format "ALL" \
-    --log /report/dc.log \
     --project "$DC_PROJECT" \
     --out /report
     # Use suppression like this: (where /src == $pwd)
-    # --suppression "/src/security/dependency-check-suppression.xml"

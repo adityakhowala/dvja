@@ -32,7 +32,7 @@ pipeline {
                     then
                         mkdir odc-reports
                     fi
-                    sudo chown -R jenkins:jenkins odc-reports/ || :
+                    chown -R jenkins:root odc-reports/ || :
                     chmod +x OWASP-Dependency-Check.sh
                     sh OWASP-Dependency-Check.sh
                 '''

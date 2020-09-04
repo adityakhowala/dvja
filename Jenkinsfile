@@ -27,12 +27,13 @@ pipeline {
         stage('Software composition analysis') {
             steps {
                 sh '''
-                    echo ${USER}
-                    if [[ ! -d odc-reports ]]
-                    then
-                        mkdir odc-reports
-                    fi
-                    chown -R jenkins:root odc-reports/ || :
+                    #echo ${USER}
+                    #if [[ ! -d odc-reports ]]
+                    #then
+                    #    mkdir odc-reports
+                    #fi
+                    mkdir odc-reports || :
+                    chown -R jenkins:root odc-reports || :
                     chmod +x OWASP-Dependency-Check.sh
                     sh OWASP-Dependency-Check.sh
                 '''

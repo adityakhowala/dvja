@@ -24,6 +24,15 @@ pipeline {
             }
         }
         
+        stage('Software composition analysis') {
+            steps {
+                sh '''
+                    chmod +x OWASP-Dependency-Check.sh
+                    bash OWASP-Dependency-Check.sh
+                '''
+            }
+        }
+        
         stage('Build') {
             steps {
               sh 'mvn clean package'

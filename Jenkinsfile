@@ -42,7 +42,7 @@ pipeline {
                         touch target/sonar/report-task.txt || :
                         touch report-task.txt || :
                     '''
-                    sh 'mvn sonar:sonar'
+                    sh 'mvn clean deploy sonar:sonar'
                     sh 'target/sonar/report-task.txt'
                 }
             }

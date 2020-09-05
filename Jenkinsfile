@@ -40,24 +40,25 @@ pipeline {
             
             }
         }
-        stage('SAST scan') {
-            steps {
-                withSonarQubeEnv('sonarqube') {
-                    sh '''
-                        mkdir -p target/sonar || :
-                        touch target/sonar/report-task.txt || :
-                        touch report-task.txt || :
-                    '''
-                    sh 'mvn clean sonar:sonar'
-                    sh 'target/sonar/report-task.txt'
-                }
-            }
-        }
-        
+        //stage('SAST scan') {
+        //    steps {
+        //            sh 'mvn clean sonar:sonar'
+        //            sh 'target/sonar/report-task.txt'
+        //        }
+        //    }
+        //}
         stage('Deploy to tomcat'){
             steps {
                 sshagent(['tomcat-ssh']) {
                     sh 'scp -v -o StrictHostKeyChecking=no target/*.war tomcat-dev@10.10.0.4:~/apache-tomcat-8.5.57/webapps/webapp.war'
+                }
+            }
+        }
+        
+        stage('DAST Scan){
+            steps {
+                sshagent(['dast-machine-zap']) {
+                    sh 'scp -v -o StrictHostKeyChecking=no dast-machine@10.10.0.6 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://104.209.147.202:8080/webapp"'
                 }
             }
         }

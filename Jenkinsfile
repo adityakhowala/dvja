@@ -55,7 +55,7 @@ pipeline {
             }
         }
         
-        stage('DAST Scan){
+        stage('DAST Scan'){
             steps {
                 sshagent(['dast-machine-zap']) {
                     sh 'ssh -v -o StrictHostKeyChecking=no dast-machine@10.10.0.6 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://104.209.147.202:8080/webapp"'

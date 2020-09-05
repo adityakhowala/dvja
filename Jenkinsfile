@@ -5,9 +5,9 @@ pipeline {
         stage('Initialize') {
             steps {
                 sh '''
-                    echo "==============================="
+                    
                     echo "Initializing DEVSECOPS pipeline"
-                    echo "==============================="
+                    
                 '''
             }
         }

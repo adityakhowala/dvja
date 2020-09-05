@@ -37,6 +37,10 @@ pipeline {
         stage('SAST scan') {
             steps {
                 withSonarQubeEnv('sonarqube') {
+                    sh '''
+                        mkdir target/sonar || :
+                        touch target/sonar/report-task.txt || :
+                    '''
                     sh 'mvn sonar:sonar'
                     sh 'target/sonar/report-task.txt'
                 }

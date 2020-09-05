@@ -40,6 +40,7 @@ pipeline {
                     sh '''
                         mkdir -p target/sonar || :
                         touch target/sonar/report-task.txt || :
+                        touch report-task.txt || :
                     '''
                     sh 'mvn sonar:sonar'
                     sh 'target/sonar/report-task.txt'

@@ -38,7 +38,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonarqube') {
                     sh '''
-                        mkdir target/sonar || :
+                        mkdir -p target/sonar || :
                         touch target/sonar/report-task.txt || :
                     '''
                     sh 'mvn sonar:sonar'

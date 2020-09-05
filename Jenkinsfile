@@ -33,7 +33,13 @@ pipeline {
                 '''
             }
         }
-        
+                
+        stage('Build') {
+            steps {
+              sh 'mvn clean package'
+            
+            }
+        }
         stage('SAST scan') {
             steps {
                 withSonarQubeEnv('sonarqube') {
@@ -45,13 +51,6 @@ pipeline {
                     sh 'mvn clean sonar:sonar'
                     sh 'target/sonar/report-task.txt'
                 }
-            }
-        }
-        
-        stage('Build') {
-            steps {
-              sh 'mvn clean package'
-            
             }
         }
         
